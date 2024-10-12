@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    ports:
+      - '8080:7331'
+    command: make watch
+    volumes:
+      - .:/app
+
