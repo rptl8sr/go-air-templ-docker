@@ -6,16 +6,27 @@ type IndexProps struct {
 
 templ Index(props IndexProps) {
     <!doctype html>
-    <html lang="en">
+    <html lang="en" data-theme="cupcake">
     <head>
     <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="/assets/main.css" rel="stylesheet">
+        <script src="https://unpkg.com/htmx.org@2.0.3"></script>
         <title>{ props.Name }</title>
     </head>
     <body>
-      <h1>{ props.Name }</h1>
-      <p>Run</p>
+      @header()
+      <div class="container mx-auto">
+          <h1>{ props.Name }</h1>
+      </div>
     </body>
     </html>
+}
+
+templ header() {
+    <header class="navbar bg-primary text-primary-content">
+        <a href="/" hx-push-url="true" hx-get="/" hx-target="body" hx-swap="outerHTML" class="btn btn-ghost text-xl">Index</a>
+        <a href="/other" hx-push-url="true" hx-get="/other" hx-target="body" hx-swap="outerHTML" class="btn btn-ghost text-xl">Other</a>
+    </header>
 }

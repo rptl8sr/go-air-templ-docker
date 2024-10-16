@@ -28,7 +28,7 @@ git-checkout:
 
 # BUILDING
 .PHONY: build
-build: build-templ test build-app
+build: build-templ test build-app build-css
 
 .PHONY: build-templ
 build-templ:
@@ -45,10 +45,17 @@ build-app:
 	go build -o ./tmp/main -v .
 
 
+.PHONY: build-css
+build-css:
+	npm run build-css
+	#npm --prefix
+
+
 # WATCHING
 .PHONY: watch
 watch:
-	$(MAKE) -j2 watch-templ watch-app
+	$(MAKE) build
+	$(MAKE) -j3 watch-templ watch-app watch-css
 
 
 
@@ -63,3 +70,9 @@ watch-templ:
 .PHONY: watch-app
 watch-app:
 	air
+
+
+.PHONY: watch-css
+watch-css:
+	npm run watch-css
+
